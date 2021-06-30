@@ -1,0 +1,31 @@
+2021-06-30 16:25:33.201  INFO 16692 --- [restartedMain] com.example.blog2.Blog2Application       : Starting Blog2Application using Java 13.0.2 on DESKTOP-LUAO2LV with PID 16692 (C:\Users\zm\IdeaProjects\myblog-backend\target\classes started by zm in C:\Users\zm\IdeaProjects\myblog-backend)
+2021-06-30 16:25:33.205 DEBUG 16692 --- [restartedMain] com.example.blog2.Blog2Application       : Running with Spring Boot v2.4.4, Spring v5.3.5
+2021-06-30 16:25:33.206  INFO 16692 --- [restartedMain] com.example.blog2.Blog2Application       : No active profile set, falling back to default profiles: default
+2021-06-30 16:25:33.309  INFO 16692 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-30 16:25:33.309  INFO 16692 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-30 16:25:34.406  INFO 16692 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-30 16:25:34.514  INFO 16692 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 99 ms. Found 5 JPA repository interfaces.
+2021-06-30 16:25:34.677  WARN 16692 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.example.blog2]' package. Please check your configuration.
+2021-06-30 16:25:35.354  INFO 16692 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8090 (http)
+2021-06-30 16:25:35.365  INFO 16692 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-30 16:25:35.366  INFO 16692 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-06-30 16:25:35.480  INFO 16692 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-30 16:25:35.481  INFO 16692 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2171 ms
+2021-06-30 16:25:35.664  INFO 16692 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-30 16:25:35.739  INFO 16692 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-06-30 16:25:35.889  INFO 16692 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-30 16:25:36.012  INFO 16692 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-30 16:25:36.477  INFO 16692 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-30 16:25:36.504  INFO 16692 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-06-30 16:25:37.712  INFO 16692 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-30 16:25:37.730  INFO 16692 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-30 16:25:41.141  WARN 16692 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-06-30 16:25:41.423  INFO 16692 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-30 16:25:43.001  INFO 16692 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-30 16:25:43.435  INFO 16692 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8090 (http) with context path ''
+2021-06-30 16:25:43.450  INFO 16692 --- [restartedMain] com.example.blog2.Blog2Application       : Started Blog2Application in 11.381 seconds (JVM running for 20.153)
+2021-06-30 16:26:03.636  INFO 16692 --- [http-nio-8090-exec-4] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-30 16:26:03.636  INFO 16692 --- [http-nio-8090-exec-4] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-06-30 16:26:03.638  INFO 16692 --- [http-nio-8090-exec-4] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2021-06-30 16:26:03.736  WARN 16692 --- [http-nio-8090-exec-6] org.hibernate.orm.deprecation            : HHH90000016: Found use of deprecated 'collection property' syntax in HQL/JPQL query [t.blogs.size]; use collection function syntax instead [size(t.blogs)].
+2021-06-30 16:26:03.737  WARN 16692 --- [http-nio-8090-exec-8] org.hibernate.orm.deprecation            : HHH90000016: Found use of deprecated 'collection property' syntax in HQL/JPQL query [t.blogs.size]; use collection function syntax instead [size(t.blogs)].
