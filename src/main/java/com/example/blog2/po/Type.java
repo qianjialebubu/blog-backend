@@ -13,7 +13,6 @@ import java.util.List;
  * @version 1.0
  * @date 2021/3/31 15:52
  */
-@Data
 @Entity
 @Table(name = "t_type")
 public class Type {
@@ -34,45 +33,45 @@ public class Type {
 
     }
 
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public List<Blog> getBlogs() {
-//        return blogs;
-//    }
-//
-//    public void setBlogs(List<Blog> blogs) {
-//        this.blogs = blogs;
-//    }
-//
-//    public String getPic_url() {
-//        return pic_url;
-//    }
-//
-//    public void setPic_url(String pic_url) {
-//        this.pic_url = pic_url;
-//    }
-//
-//    public String getColor() {
-//        return color;
-//    }
-//
-//    public void setColor(String color) {
-//        this.color = color;
-//    }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Blog> getBlogs() {
+        return blogs;
+    }
+
+    public void setBlogs(List<Blog> blogs) {
+        this.blogs = blogs;
+    }
+
+    public String getPic_url() {
+        return pic_url;
+    }
+
+    public void setPic_url(String pic_url) {
+        this.pic_url = pic_url;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     @Override
     public String toString() {
