@@ -1,5 +1,6 @@
 package com.example.blog2.po;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -23,10 +24,13 @@ public class Comment {
     private String email;
     private String content;
     private String avatar;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
+
     @ManyToOne
     private Blog blog = new Blog();
+
     @OneToMany(mappedBy = "parentComment")
     private List<Comment> replyComments = new ArrayList<>();
     @ManyToOne
@@ -37,6 +41,7 @@ public class Comment {
     public Comment() {
     }
 
+    @JsonIgnore
     public List<Comment> getReplyComments() {
         return replyComments;
     }
@@ -127,7 +132,7 @@ public class Comment {
                 ", content='" + content + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", createTime=" + createTime +
-                ", blog=" + blog +
+//                ", blog=" + blog +
                 ", replyComments=" + replyComments +
                 ", parentComment=" + parentComment +
                 ", adminComment=" + adminComment +

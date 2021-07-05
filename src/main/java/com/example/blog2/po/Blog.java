@@ -253,7 +253,7 @@ public class Blog {
 //                ", type=" + type +
 //                ", tags=" + tags +
                 ", user=" + user +
-                ", comments=" + comments +
+//                ", comments=" + comments +
                 ", tagIds='" + tagIds + '\'' +
                 '}';
     }
