@@ -4,12 +4,15 @@ import com.example.blog2.po.Result;
 import com.example.blog2.po.StatusCode;
 import com.example.blog2.po.User;
 import com.example.blog2.service.UserService;
+import com.example.blog2.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author zhaomin_2017013792_CS181
@@ -17,7 +20,7 @@ import javax.servlet.http.HttpSession;
  * @date 2021/3/31 23:10
  */
 
-@Controller
+@RestController
 @RequestMapping("/admin")
 @CrossOrigin
 public class LoginController {
@@ -30,17 +33,21 @@ public class LoginController {
         return "admin/login";
     }
 
-    @PostMapping("login")
-    public Result login(@RequestParam String username, @RequestParam String password,
-                        HttpSession session, RedirectAttributes attributes) {
+    @PostMapping("/login")
+    public Result login(@RequestHeader Map<String, Object> head, @RequestBody Map<String, Object> para,
+                        HttpSession session) {
+        System.out.println(head);
+        String username = (String) para.get("username");
+        String password = (String) para.get("password");
         User user = userService.checkUser(username, password);
         if (user != null) {
-            user.setPassword(null);
-            session.setAttribute("user", user);
-            return new Result(true, StatusCode.OK, "管理员登录成功", user);
+            String token = TokenUtil.getToken(user);
+            Map<String,Object> info = new HashMap<>();
+            info.put("userInfo",user);
+            info.put("token",token);
+            return new Result(true, StatusCode.OK, "管理员登录成功", info);
         } else {
-            attributes.addFlashAttribute("message","用户名和密码错误");
-            return new Result(true, StatusCode.OK, "管理员登录失败", null);
+            return new Result(true, StatusCode.ERROR, "管理员登录失败", null);
         }
     }
 

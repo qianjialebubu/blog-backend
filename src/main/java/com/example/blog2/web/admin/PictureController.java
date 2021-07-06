@@ -42,5 +42,4 @@ public class PictureController {
         System.out.println("上传失败");
         return "失败";
     }
-
 }

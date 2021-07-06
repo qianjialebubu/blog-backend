@@ -1,5 +1,7 @@
 package com.example.blog2.po;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,6 +30,7 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Blog> blogs = new ArrayList<>();
 
     public Long getId() {
