@@ -80,4 +80,14 @@ public class CommentServiceImpl implements CommentService{
         comment.setCreateTime(new Date());
         return commentRepository.save(comment);
     }
+
+    @Override
+    public List<Comment> listComment() {
+        return commentRepository.findAll();
+    }
+
+    @Override
+    public List<String> CommentCountByMonth() {
+        return commentRepository.CommentCountByMonth();
+    }
 }

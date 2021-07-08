@@ -27,6 +27,7 @@ public class Tag {
 
     public Tag() {
     }
+
     @JsonIgnoreProperties({ "tags"})
     public List<Blog> getBlogs() {
         return blogs;

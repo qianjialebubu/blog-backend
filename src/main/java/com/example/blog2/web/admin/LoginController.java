@@ -34,8 +34,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public Result login(@RequestHeader Map<String, Object> head, @RequestBody Map<String, Object> para,
-                        HttpSession session) {
+    public Result login(@RequestHeader Map<String, Object> head, @RequestBody Map<String, Object> para) {
         System.out.println(head);
         String username = (String) para.get("username");
         String password = (String) para.get("password");
@@ -43,7 +42,7 @@ public class LoginController {
         if (user != null) {
             String token = TokenUtil.getToken(user);
             Map<String,Object> info = new HashMap<>();
-            info.put("userInfo",user);
+            info.put("user",user);
             info.put("token",token);
             return new Result(true, StatusCode.OK, "管理员登录成功", info);
         } else {

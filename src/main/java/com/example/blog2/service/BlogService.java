@@ -5,6 +5,7 @@ import com.example.blog2.vo.BlogQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,4 +39,17 @@ public interface BlogService {
     Map<String,List<Blog>> archiveBlog();
 
     Long countBlog();
+
+    Long countViews();
+
+    List<String> ViewCountByMonth();
+
+    List<String> BlogCountByMonth();
+
+    List<String> appreciateCountByMonth();
+
+    Long countAppreciate();
+
+    Long countComment();
+
 }

@@ -2,8 +2,11 @@ package com.example.blog2.service;
 
 import com.example.blog2.dao.UserRepository;
 import com.example.blog2.po.User;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 /**
  * @author zhaomin_2017013792_CS181
@@ -19,7 +22,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User checkUser(String username, String password) {
-        User user = userRepository.findByUsernameAndPassword(username,password);
+        User user = userRepository.findByUsernameAndPassword(username, password);
         return user;
     }
+
+    @Transactional
+    @Override
+    public User findUserById(Long id) {
+        return userRepository.getOne(id);
+    }
+
+    @Transactional
+    @Override
+    public void updateUser(Long id, User admin) {
+        User u = userRepository.getOne(id);
+        BeanUtils.copyProperties(admin, u);
+        userRepository.save(u);
+    }
+
 }

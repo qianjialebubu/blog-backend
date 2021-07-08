@@ -28,7 +28,7 @@ public class Blog {
     private String firstPicture;
     private String flag;
     private Integer views;
-    private boolean appreciation;
+    private Integer appreciation;
     private boolean shareStatement;
     private boolean commentabled;
     private boolean published;
@@ -159,11 +159,11 @@ public class Blog {
         this.views = views;
     }
 
-    public boolean isAppreciation() {
+    public Integer isAppreciation() {
         return appreciation;
     }
 
-    public void setAppreciation(boolean appreciation) {
+    public void setAppreciation(Integer appreciation) {
         this.appreciation = appreciation;
     }
 

@@ -2,6 +2,8 @@ package com.example.blog2.web.admin;
 
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
+import com.example.blog2.po.Result;
+import com.example.blog2.po.StatusCode;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,9 +21,9 @@ import java.util.UUID;
 public class PictureController {
     @PostMapping(value = "/upload")
     @ResponseBody
-    public String upload(@RequestParam("file") MultipartFile file) {
+    public Result upload(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
-            return "失败";
+            return new Result(true, StatusCode.ERROR,"上传图片为空",null);
         }
         JSONObject postData = new JSONObject();
         String fileName = file.getOriginalFilename();//上传的文件名
@@ -35,11 +37,11 @@ public class PictureController {
             //FilePath是你服务端的项目接口路径
             JSONObject json = client.postForEntity("http://hikari.top/pic_server/upload/upImg", postData, JSONObject.class).getBody();
             System.out.println("上传成功");
-            return (String) json.get("data");//返回文件下载地址
+            return new Result(true, StatusCode.OK,"上传图片成功",json.get("data"));
         } catch (IOException | JSONException e) {
             System.out.println(e.toString());
         }
         System.out.println("上传失败");
-        return "失败";
+        return new Result(true, StatusCode.ERROR,"上传图片失败",null);
     }
 }

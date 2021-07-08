@@ -1,6 +1,7 @@
 package com.example.blog2.po;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "t_user")
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer"})
 public class User {
     @Id
     @GeneratedValue

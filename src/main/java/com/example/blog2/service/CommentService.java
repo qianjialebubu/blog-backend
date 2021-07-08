@@ -14,4 +14,9 @@ public interface CommentService {
     List<Comment> listCommentByBlogId(Long blogId);
 
     Comment saveComment(Comment comment);
+
+    List<Comment> listComment();
+
+    List<String> CommentCountByMonth();
+
 }

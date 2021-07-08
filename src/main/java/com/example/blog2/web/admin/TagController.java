@@ -1,94 +1,66 @@
-//package com.example.blog2.web.admin;
-//
-//import com.example.blog2.po.Tag;
-//import com.example.blog2.service.TagService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.data.domain.Pageable;
-//import org.springframework.data.domain.Sort;
-//import org.springframework.data.web.PageableDefault;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.validation.BindingResult;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.PathVariable;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-//
-//import javax.validation.Valid;
-//
-///**
-// * @author zhaomin_2017013792_CS181
-// * @version 1.0
-// * @date 2021/4/1 11:41
-// */
-//@Controller
-//@RequestMapping("/admin")
-//public class TagController {
-//
-//    @Autowired
-//    private TagService tagService;
-//
-//    @GetMapping("/tags")
-//    public String tags(@PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.DESC)Pageable pageable, Model model) {
-//        model.addAttribute("page",tagService.listTag(pageable));
-//        return "admin/tags";
+package com.example.blog2.web.admin;
+
+import com.example.blog2.po.Result;
+import com.example.blog2.po.StatusCode;
+import com.example.blog2.po.Tag;
+import com.example.blog2.service.TagService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+
+/**
+ * @author zhaomin_2017013792_CS181
+ * @version 1.0
+ * @date 2021/4/1 11:41
+ */
+@RestController
+@RequestMapping("/admin")
+@CrossOrigin
+public class TagController {
+
+    @Autowired
+    private TagService tagService;
+
+//    @GetMapping("/getFullTagList")
+//    public Result getFullTagList() {
+//        return new Result(true, StatusCode.OK, "获取所有博客标签成功", tagService.listTag());
 //    }
-//
-//    @PostMapping("/tags")
-//    public String post(@Valid Tag tag, BindingResult result, RedirectAttributes attributes) {
-//        Tag tag1 = tagService.getTagByName(tag.getName());
-//        if (tag1 != null){
-//            result.rejectValue("name","nameError","不能添加重复的类");
-//        }
-//        if (result.hasErrors()){
-//            return "admin/tags-input";
-//        }
-//        Tag t = tagService.saveTag(tag);
-//        if (t==null){
-//            attributes.addFlashAttribute("message","新增成功");
-//        } else {
-//            attributes.addFlashAttribute("message","新增失败");
-//        }
-//        return "redirect:/admin/tags";
-//    }
-//
-//    @PostMapping("/tags/{id}")
-//    public String editPost(@Valid Tag tag, BindingResult result, @PathVariable Long id, RedirectAttributes attributes) {
-//        System.out.println("/tags/{id}+ "+tag);
-//        System.out.println("/tags/{id}+ "+id);
-//        Tag tag1 = tagService.getTagByName(tag.getName());
-//        if (tag1 != null){
-//            result.rejectValue("name","nameError","不能添加重复的标签");
-//        }
-//        if (result.hasErrors()){
-//            return "admin/tags-input";
-//        }
-//        Tag t = tagService.updateTag(id, tag);
-//        if (t==null){
-//            attributes.addFlashAttribute("message","新增成功");
-//        } else {
-//            attributes.addFlashAttribute("message","新增失败");
-//        }
-//        return "redirect:/admin/tags";
-//    }
-//
-//    @GetMapping("/tags/input")
-//    public String input(Model model) {
-//        model.addAttribute("tag",new Tag());
-//        return "admin/tags-input";
-//    }
-//
-//    @GetMapping("/tags/{id}/input")
-//    public String editInput(@PathVariable Long id, Model model) {
-//        model.addAttribute("tag", tagService.getTag(id));
-//        return "admin/tags-input";
-//    }
-//
-//    @GetMapping("/tags/{id}/delete")
-//    public String delete(@PathVariable Long id, RedirectAttributes attributes) {
-//        tagService.deleteTag(id);
-//        attributes.addFlashAttribute("message","删除成功");
-//        return "redirect:/admin/tags";
-//    }
-//}
+
+    @PostMapping("/tags")
+    public Result post(@RequestBody Map<String, Object> para) {
+        Tag tag1 = tagService.getTagByName((String) para.get("name"));
+        if (tag1 != null) {
+            return new Result(false, StatusCode.ERROR, "不能添加重复的标签", null);
+        }
+        Tag tag = new Tag();
+        tag.setName((String) para.get("name"));
+        Tag t = tagService.saveTag(tag);
+        if (t == null) {
+            return new Result(false, StatusCode.ERROR, "新增失败", null);
+        }
+        return new Result(true, StatusCode.OK, "新增成功", null);
+    }
+
+    @PostMapping("/tags/{id}")
+    public Result editPost(@RequestBody Map<String, Object> para,@PathVariable Long id) {
+        Tag tag1 = tagService.getTag(id);
+        if (tag1 != null) {
+            return new Result(false, StatusCode.ERROR, "不能添加重复的标签", null);
+        }
+        Tag tag = new Tag();
+        tag.setName((String) para.get("name"));
+        Tag t = tagService.saveTag(tag);
+        if (t == null) {
+            return new Result(false, StatusCode.ERROR, "修改失败", null);
+        }
+        return new Result(true, StatusCode.OK, "修改成功", null);
+    }
+
+
+    @GetMapping("/tags/{id}/delete")
+    public Result delete(@PathVariable Long id) {
+        tagService.deleteTag(id);
+        return new Result(true, StatusCode.OK, "删除成功", null);
+    }
+}

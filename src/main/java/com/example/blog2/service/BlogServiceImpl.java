@@ -4,6 +4,7 @@ import com.example.blog2.dao.BlogRepository;
 import com.example.blog2.po.Blog;
 import com.example.blog2.po.Type;
 import com.example.blog2.util.MarkdownUtils;
+import com.example.blog2.util.MyBeanUtils;
 import com.example.blog2.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,37 +81,35 @@ public class BlogServiceImpl implements BlogService {
     @Transactional
     @Override
     public Blog saveBlog(Blog blog) {
-//        if (blog.getFlag() == null || "".equals(blog.getFlag())) {
-//            blog.setFlag("原创");
-//        }
-//        if (blog.getFirstPicture() == null || "".equals(blog.getFirstPicture())) {
-//            blog.setFirstPicture(blog.getType().getPic_url());
-//        }
-//        if (blog.getDescription() == null || "".equals(blog.getDescription())) {
-//            blog.setDescription(blog.getContent().substring(0, Math.min(120, blog.getContent().length())));
-//        }
-//        if (blog.getId() == null) {
-//            blog.setCreateTime(new Date());
-//            blog.setUpdateTime(new Date());
-//            blog.setViews(0);
-//        } else {
-//            blog.setUpdateTime(new Date());
-//        }
-//        return blogRepository.save(blog);
-        return null;
+        if (blog.getFlag() == null || "".equals(blog.getFlag())) {
+            blog.setFlag("原创");
+        }
+        if (blog.getFirstPicture() == null || "".equals(blog.getFirstPicture())) {
+            blog.setFirstPicture(blog.getType().getPic_url());
+        }
+        if (blog.getDescription() == null || "".equals(blog.getDescription())) {
+            blog.setDescription(blog.getContent().substring(0, Math.min(120, blog.getContent().length())));
+        }
+        if (blog.getId() == null) {
+            blog.setCreateTime(new Date());
+            blog.setUpdateTime(new Date());
+            blog.setViews(0);
+        } else {
+            blog.setUpdateTime(new Date());
+        }
+        return blogRepository.save(blog);
     }
 
     @Transactional
     @Override
     public Blog updateBlog(Long id, Blog blog) {
-//        Blog b = blogRepository.getOne(id);
-//        BeanUtils.copyProperties(blog, b, MyBeanUtils.getNullPropertyNames(blog));
-//        if (b.getFirstPicture() == null || "".equals(b.getFirstPicture())) {
-//            b.setFirstPicture(b.getType().getPic_url());
-//        }
-//        b.setUpdateTime(new Date());
-//        return blogRepository.save(b);
-        return null;
+        Blog b = blogRepository.getOne(id);
+        BeanUtils.copyProperties(blog, b, MyBeanUtils.getNullPropertyNames(blog));
+        if (b.getFirstPicture() == null || "".equals(b.getFirstPicture())) {
+            b.setFirstPicture(b.getType().getPic_url());
+        }
+        b.setUpdateTime(new Date());
+        return blogRepository.save(b);
     }
 
     @Transactional
@@ -145,4 +144,35 @@ public class BlogServiceImpl implements BlogService {
     public Long countBlog() {
         return blogRepository.count();
     }
+
+    @Override
+    public Long countViews() {
+        return blogRepository.countViews();
+    }
+
+    @Override
+    public Long countAppreciate() {
+        return blogRepository.countAppreciate();
+    }
+
+    @Override
+    public Long countComment() {
+        return blogRepository.countComment();
+    }
+
+    @Override
+    public List<String> ViewCountByMonth() {
+        return blogRepository.ViewCountByMonth();
+    }
+
+    @Override
+    public List<String> BlogCountByMonth() {
+        return blogRepository.BlogCountByMonth();
+    }
+
+    @Override
+    public List<String> appreciateCountByMonth() {
+        return blogRepository.appreciateCountByMonth();
+    }
+
 }

@@ -9,4 +9,7 @@ import com.example.blog2.po.User;
  */
 public interface UserService {
     User checkUser(String username, String password);
+    User findUserById(Long id);
+
+    void updateUser(Long id, User admin);
 }
