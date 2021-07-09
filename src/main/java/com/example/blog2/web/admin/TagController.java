@@ -22,19 +22,13 @@ public class TagController {
     @Autowired
     private TagService tagService;
 
-//    @GetMapping("/getFullTagList")
-//    public Result getFullTagList() {
-//        return new Result(true, StatusCode.OK, "获取所有博客标签成功", tagService.listTag());
-//    }
-
     @PostMapping("/tags")
-    public Result post(@RequestBody Map<String, Object> para) {
-        Tag tag1 = tagService.getTagByName((String) para.get("name"));
+    public Result post(@RequestBody Map<String, Tag> para) {
+        Tag tag = para.get("tag");
+        Tag tag1 = tagService.getTagByName(tag.getName());
         if (tag1 != null) {
             return new Result(false, StatusCode.ERROR, "不能添加重复的标签", null);
         }
-        Tag tag = new Tag();
-        tag.setName((String) para.get("name"));
         Tag t = tagService.saveTag(tag);
         if (t == null) {
             return new Result(false, StatusCode.ERROR, "新增失败", null);
@@ -43,10 +37,10 @@ public class TagController {
     }
 
     @PostMapping("/tags/{id}")
-    public Result editPost(@RequestBody Map<String, Object> para,@PathVariable Long id) {
-        Tag tag1 = tagService.getTag(id);
+    public Result editPost(@RequestBody Map<String, Object> para) {
+        Tag tag1 = tagService.getTagByName((String) para.get("name"));
         if (tag1 != null) {
-            return new Result(false, StatusCode.ERROR, "不能添加重复的标签", null);
+            return new Result(false, StatusCode.ERROR, "此标签已存在", null);
         }
         Tag tag = new Tag();
         tag.setName((String) para.get("name"));
@@ -63,4 +57,5 @@ public class TagController {
         tagService.deleteTag(id);
         return new Result(true, StatusCode.OK, "删除成功", null);
     }
+
 }

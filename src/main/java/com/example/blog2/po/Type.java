@@ -1,6 +1,7 @@
 package com.example.blog2.po;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
@@ -15,6 +16,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "t_type")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 public class Type {
     @Id
     @GeneratedValue
@@ -80,7 +82,7 @@ public class Type {
                 ", name='" + name + '\'' +
                 ", pic_url='" + pic_url + '\'' +
                 ", color='" + color + '\'' +
-                ", blogs=" + blogs +
+//                ", blogs=" + blogs +
                 '}';
     }
 }

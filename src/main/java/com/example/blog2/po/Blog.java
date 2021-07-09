@@ -17,6 +17,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "t_blog")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 public class Blog {
 
     @Id
@@ -93,6 +94,7 @@ public class Blog {
     public void setUser(User user) {
         this.user = user;
     }
+
     @JsonIgnoreProperties({ "blogs"})
     public List<Tag> getTags() {
         return tags;
@@ -107,6 +109,7 @@ public class Blog {
         return type;
     }
 
+    @JsonIgnoreProperties({ "blogs"})
     public void setType(Type type) {
         this.type = type;
     }
@@ -159,7 +162,7 @@ public class Blog {
         this.views = views;
     }
 
-    public Integer isAppreciation() {
+    public Integer getAppreciation() {
         return appreciation;
     }
 
@@ -250,7 +253,7 @@ public class Blog {
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", description='" + description + '\'' +
-//                ", type=" + type +
+                ", type=" + type +
 //                ", tags=" + tags +
                 ", user=" + user +
 //                ", comments=" + comments +

@@ -1,5 +1,6 @@
 package com.example.blog2.web.admin;
 
+import com.alibaba.fastjson.JSON;
 import com.example.blog2.po.Blog;
 import com.example.blog2.po.Result;
 import com.example.blog2.po.StatusCode;
@@ -17,10 +18,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import springfox.documentation.spring.web.json.Json;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author zhaomin_2017013792_CS181
@@ -48,24 +51,23 @@ public class BlogController {
         return new Result(true, StatusCode.OK, "获取博客列表成功", blogService.listBlog(pageable));
     }
 
-//    @PostMapping("/blogs")
-//    public String post(Blog blog, RedirectAttributes attributes, HttpSession session) {
-//        blog.setUser((User) session.getAttribute("user"));
-//        blog.setType(typeService.getType(blog.getType().getId()));
-//        blog.setTags(tagService.listTag(blog.getTagIds()));
-//        Blog b;
-//        if (blog.getId() == null) {
-//            b = blogService.saveBlog(blog);
-//        } else {
-//            b = blogService.updateBlog(blog.getId(), blog);
-//        }
-//        if (b == null) {
-//            attributes.addFlashAttribute("message", "操作失败");
-//        } else {
-//            attributes.addFlashAttribute("message", "操作成功");
-//        }
-//        return REDIRECT_LIST;
-//    }
+    @PostMapping("/blogs")
+    public Result post(@RequestBody Map<String, Blog> para) {
+        Blog blog = para.get("blog");
+        blog.setType(typeService.getType(blog.getType().getId()));
+        blog.setTags(tagService.listTag(blog.getTagIds()));
+        Blog b;
+        if (blog.getId() == null) {
+            b = blogService.saveBlog(blog);
+        } else {
+            System.out.println("修改");
+            b = blogService.updateBlog(blog.getId(), blog);
+        }
+        if (b == null) {
+            return new Result(false,StatusCode.ERROR,"操作失败");
+        }
+        return new Result(true,StatusCode.OK,"操作成功");
+    }
 
     //    @PostMapping("/blogs/search")
 //    public String search(@PageableDefault(size = 8, sort = {"createTime"}, direction = Sort.Direction.DESC) Pageable pageable,

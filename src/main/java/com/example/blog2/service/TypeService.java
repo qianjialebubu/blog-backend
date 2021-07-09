@@ -26,6 +26,8 @@ public interface TypeService {
 
     List<Type> listTypeTop(Integer size);
 
+    List<Type> listByNameExceptSelf(Long id,String name);
+
     Type updateType(Long id,Type type);
 
     void deleteType(Long id);

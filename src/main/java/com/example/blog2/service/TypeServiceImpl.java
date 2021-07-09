@@ -3,6 +3,7 @@ package com.example.blog2.service;
 
 import com.example.blog2.dao.TypeRepository;
 import com.example.blog2.po.Type;
+import com.example.blog2.util.MyBeanUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,10 +27,10 @@ public class TypeServiceImpl implements TypeService {
     @Autowired
     private TypeRepository typeRepository;
 
-    //放在事务里面
     @Transactional
     @Override
     public Type saveType(Type type) {
+        System.out.println("save"+type);
         return typeRepository.save(type);
     }
 
@@ -64,11 +65,16 @@ public class TypeServiceImpl implements TypeService {
         return typeRepository.findTop(pageable);
     }
 
+    @Override
+    public List<Type> listByNameExceptSelf(Long id, String name) {
+        return typeRepository.findByNameExceptSelf(id,name);
+    }
+
     @Transactional
     @Override
     public Type updateType(Long id, Type type) {
         Type t = typeRepository.getOne(id);
-        BeanUtils.copyProperties(type,t);
+        BeanUtils.copyProperties(type,t, MyBeanUtils.getNullPropertyNames(type));
         return typeRepository.save(t);
     }
 
