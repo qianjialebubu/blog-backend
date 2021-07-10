@@ -47,10 +47,7 @@ public class BlogServiceImpl implements BlogService {
             if (blog.getTypeId()!=null){
                 predicates.add(cb.equal(root.<Type>get("type").get("id"),blog.getTypeId()));
             }
-//            根据是否推荐查找
-            if (blog.isRecommend()){
-                predicates.add(cb.equal(root.<Boolean>get("recommend"),blog.isRecommend()));
-            }
+
             cq.where(predicates.toArray(new Predicate[predicates.size()]));
             return null;
         }, pageable);

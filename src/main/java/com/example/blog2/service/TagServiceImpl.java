@@ -2,6 +2,7 @@ package com.example.blog2.service;
 
 import com.example.blog2.dao.TagRepository;
 import com.example.blog2.po.Tag;
+import com.example.blog2.po.Type;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -89,5 +90,10 @@ public class TagServiceImpl implements TagService {
     @Override
     public void deleteTag(Long id) {
         tagRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Tag> listByNameExceptSelf(Long id, String name) {
+        return tagRepository.findByNameExceptSelf(id,name);
     }
 }

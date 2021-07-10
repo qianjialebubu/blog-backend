@@ -44,12 +44,20 @@ public class BlogController {
     @Autowired
     private TagService tagService;
 
-    @GetMapping("/getBlogList")
-    public Result getBlogList(@RequestParam String query, @RequestParam String pagenum, @RequestParam String pagesize) {
+    @PostMapping("/getBlogList")
+    public Result getBlogList(@RequestBody Map<String, Object> para) {
+        int pagenum = (int) para.get("pagenum");
+        int pagesize = (int) para.get("pagesize");
+        BlogQuery blogQuery = new BlogQuery();
+        if (para.get("typeId") != null){
+            blogQuery.setTypeId(Long.valueOf(para.get("typeId").toString()));
+        }
+        blogQuery.setTitle((String) para.get("title"));
         Sort sort = Sort.by(Sort.Direction.DESC, "createTime");
-        Pageable pageable = PageRequest.of(Integer.parseInt(pagenum) - 1, Integer.parseInt(pagesize), sort);
-        return new Result(true, StatusCode.OK, "获取博客列表成功", blogService.listBlog(pageable));
+        Pageable pageable = PageRequest.of(pagenum - 1,pagesize, sort);
+        return new Result(true, StatusCode.OK, "获取博客列表成功", blogService.listBlog(pageable,blogQuery));
     }
+
 
     @PostMapping("/blogs")
     public Result post(@RequestBody Map<String, Blog> para) {
@@ -69,12 +77,6 @@ public class BlogController {
         return new Result(true,StatusCode.OK,"操作成功");
     }
 
-    //    @PostMapping("/blogs/search")
-//    public String search(@PageableDefault(size = 8, sort = {"createTime"}, direction = Sort.Direction.DESC) Pageable pageable,
-//                         BlogQuery blog, Model model) {
-//        model.addAttribute("page", blogService.listBlog(pageable, blog));
-//        return "admin/blogs :: blogList";
-//    }
     @GetMapping("/search")
     public Result search(@PageableDefault(size = 8, sort = {"createTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                          @RequestParam String query) {
@@ -82,32 +84,10 @@ public class BlogController {
         return new Result(true, StatusCode.OK, "获取搜索博客成功", blogService.listBlog("%" + query + "%", pageable));
     }
 
-
-//    @GetMapping("/blogs/input")
-//    public String input(Model model) {
-//        setTypeAndTag(model);
-//        model.addAttribute("blog", new Blog());
-//        return INPUT;
-//    }
-//
-//    @GetMapping("/blogs/{id}/input")
-//    public String editInput(@PathVariable Long id, Model model) {
-//        setTypeAndTag(model);
-//        Blog blog = blogService.getBlog(id);
-//        blog.init();
-//        model.addAttribute("blog", blog);
-//        return INPUT;
-//    }
-
     @GetMapping("/blogs/{id}/delete")
     public Result delete(@PathVariable Long id) {
         blogService.deleteBlog(id);
         return new Result();
     }
-
-//    private void setTypeAndTag(Model model) {
-//        model.addAttribute("types", typeService.listType());
-//        model.addAttribute("tags", tagService.listTag());
-//    }
 
 }

@@ -36,6 +36,7 @@ public class TypeController {
 //        return "admin/types-input";
 //    }
 
+//    新增或删除type
     @PostMapping("/types")
     public Result post(@RequestBody Map<String, Type> para) {
         Type type = para.get("type");
@@ -45,40 +46,20 @@ public class TypeController {
             if (type1 != null) {
                 return new Result(false, StatusCode.ERROR, "不能添加重复的分类", null);
             }
-            Type t = typeService.saveType(type);
-            if (t == null) {
-                return new Result(false, StatusCode.ERROR, "新增失败", null);
-            }
-            return new Result(true, StatusCode.OK, "新增成功", null);
         } else {
             System.out.println("修改");
             List<Type> typeList = typeService.listByNameExceptSelf(type.getId(),type.getName());
             if (typeList.size() >0 ) {
                 return new Result(false, StatusCode.ERROR, "分类名称已存在", null);
             }
-            Type t = typeService.updateType(type.getId(),type);
-            if (t == null) {
-                return new Result(false, StatusCode.ERROR, "修改失败", null);
-            }
-            return new Result(true, StatusCode.OK, "修改成功", null);
         }
-    }
-
-    @PostMapping("/types/{id}")
-//  Type和BindingResult一定是挨着的
-    public Result editPost(@RequestBody Map<String, Object> para, Long id) {
-        Type type1 = typeService.getTypeByName((String) para.get("name"));
-        if (type1 != null) {
-            return new Result(false, StatusCode.ERROR, "类名已存在", null);
-        }
-        Type type = new Type();
-        type.setName((String) para.get("name"));
-        Type t = typeService.saveType(type);
+        Type t = typeService.updateType(type.getId(),type);
         if (t == null) {
             return new Result(false, StatusCode.ERROR, "修改失败", null);
         }
         return new Result(true, StatusCode.OK, "修改成功", null);
     }
+
 
     @GetMapping("/types/{id}/delete")
     public Result delete(@PathVariable Long id) {

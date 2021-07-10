@@ -20,4 +20,7 @@ public interface TagRepository extends JpaRepository<Tag, Long> {
 
     @Query("select t from Tag t")
     List<Tag> findTop(Pageable pageable);
+
+    @Query("select t from Tag t where t.id <> ?1 and t.name = ?2")
+    List<Tag> findByNameExceptSelf(Long id, String name);
 }

@@ -32,7 +32,7 @@ public class IndexController {
     @Autowired
     private TagService tagService;
 
-    @GetMapping("/getBlogList")
+    @GetMapping("/blogs")
     public Result getBlogList(@RequestParam String query,@RequestParam String pagenum,@RequestParam String pagesize) {
         Sort sort = Sort.by(Sort.Direction.DESC,"createTime");
         Pageable pageable = PageRequest.of(Integer.parseInt(pagenum)-1, Integer.parseInt(pagesize),sort);
