@@ -24,18 +24,6 @@ public class TypeController {
     @Autowired
     private TypeService typeService;
 
-//    @GetMapping("/types/input")
-//    public String input(Model model) {
-//        model.addAttribute("type", new Type());
-//        return "admin/types-input";
-//    }
-
-//    @GetMapping("types/{id}/input")
-//    public String editInput(@PathVariable Long id, Model model) {
-//        model.addAttribute("type", typeService.getType(id));
-//        return "admin/types-input";
-//    }
-
 //    新增或删除type
     @PostMapping("/types")
     public Result post(@RequestBody Map<String, Type> para) {

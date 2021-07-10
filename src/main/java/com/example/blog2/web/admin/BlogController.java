@@ -1,10 +1,7 @@
 package com.example.blog2.web.admin;
 
 import com.alibaba.fastjson.JSON;
-import com.example.blog2.po.Blog;
-import com.example.blog2.po.Result;
-import com.example.blog2.po.StatusCode;
-import com.example.blog2.po.User;
+import com.example.blog2.po.*;
 import com.example.blog2.service.BlogService;
 import com.example.blog2.service.TagService;
 import com.example.blog2.service.TypeService;
@@ -14,15 +11,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import springfox.documentation.spring.web.json.Json;
 
-import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.HashMap;
+
 import java.util.Map;
 
 /**
@@ -88,6 +79,16 @@ public class BlogController {
     public Result delete(@PathVariable Long id) {
         blogService.deleteBlog(id);
         return new Result();
+    }
+
+    @GetMapping("/dealDeletedTag/{id}")
+    public Result dealDeletedTag(@PathVariable Long id){
+        Tag tag = tagService.getTag(id);
+        if (tag.getBlogs().size()==0){
+            System.out.println("去除无用标签");
+            tagService.deleteTag(id);
+        }
+        return new Result(true, StatusCode.OK, "处理标签成功", null);
     }
 
 }

@@ -31,7 +31,7 @@ public class TagController {
         if (tag.getId()!=null){
             Tag tag1 = tagService.getTagByName(tag.getName());
             if (tag1 != null) {
-                return new Result(false, StatusCode.ERROR, "不能添加重复的标签", null);
+                return new Result(false, StatusCode.ERROR, "不能添加重复的标签",null);
             }
         } else {
             List<Tag> tagList = tagService.listByNameExceptSelf(tag.getId(),tag.getName());
@@ -44,22 +44,7 @@ public class TagController {
         if (t == null) {
             return new Result(false, StatusCode.ERROR, "修改失败", null);
         }
-        return new Result(true, StatusCode.OK, "修改成功", null);
-    }
-
-    @PostMapping("/tags/{id}")
-    public Result editPost(@RequestBody Map<String, Object> para) {
-        Tag tag1 = tagService.getTagByName((String) para.get("name"));
-        if (tag1 != null) {
-            return new Result(false, StatusCode.ERROR, "此标签已存在", null);
-        }
-        Tag tag = new Tag();
-        tag.setName((String) para.get("name"));
-        Tag t = tagService.saveTag(tag);
-        if (t == null) {
-            return new Result(false, StatusCode.ERROR, "修改失败", null);
-        }
-        return new Result(true, StatusCode.OK, "修改成功", null);
+        return new Result(true, StatusCode.OK, "修改成功", t);
     }
 
 
