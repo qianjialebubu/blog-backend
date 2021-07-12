@@ -29,54 +29,13 @@ public class CommentServiceImpl implements CommentService{
     public List<Comment> listCommentByBlogId(Long blogId) {
         Sort sort = Sort.by("createTime");
         List<Comment> comments = commentRepository.findByBlogIdAndParentCommentNull(blogId,sort);
-        return eachComment(comments);
+        return comments;
     }
 
-    private List<Comment> eachComment(List<Comment> comments) {
-        List<Comment> commentsView = new ArrayList<>();
-        for (Comment comment : comments) {
-            Comment c = new Comment();
-            BeanUtils.copyProperties(comment,c);
-            commentsView.add(c);
-        }
-        combineChildren(commentsView);
-        return commentsView;
-    }
-
-    private void combineChildren(List<Comment> comments) {
-
-        for (Comment comment : comments) {
-            List<Comment> replys1 = comment.getReplyComments();
-            for (Comment reply1 : replys1){
-                recursively(reply1);
-            }
-            comment.setReplyComments(tempReplys);
-            tempReplys = new ArrayList<>();
-        }
-    }
-
-    private void recursively(Comment comment) {
-        tempReplys.add(comment);
-        if(comment.getReplyComments().size()>0){
-            List<Comment> replys = comment.getReplyComments();
-            for (Comment reply : replys){
-                tempReplys.add(reply);
-                if(reply.getReplyComments().size()>0){
-                    recursively(reply);
-                }
-            }
-        }
-    }
 
     @Transactional
     @Override
     public Comment saveComment(Comment comment) {
-        Long parentCommentId = comment.getParentComment().getId();
-        if (parentCommentId != -1){
-            comment.setParentComment(commentRepository.getOne(parentCommentId));
-        } else {
-            comment.setParentComment(null);
-        }
         comment.setCreateTime(new Date());
         return commentRepository.save(comment);
     }
@@ -89,5 +48,15 @@ public class CommentServiceImpl implements CommentService{
     @Override
     public List<String> CommentCountByMonth() {
         return commentRepository.CommentCountByMonth();
+    }
+
+    @Override
+    public Comment getCommentById(Long id) {
+        return commentRepository.getOne(id);
+    }
+
+    @Override
+    public void deleteComment(Long id) {
+        commentRepository.deleteById(id);
     }
 }

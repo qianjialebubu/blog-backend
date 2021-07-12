@@ -39,7 +39,6 @@ public class IndexController {
         return new Result(true, StatusCode.OK, "获取博客列表成功", blogService.listBlog(pageable));
     }
 
-
     @GetMapping("/getRecommendBlogList")
     public Result getRecommendBlogList() {
         return new Result(true, StatusCode.OK, "获取推荐博客成功", blogService.listRecommendBlogTop(8));

@@ -15,13 +15,16 @@ import java.util.List;
  */
 @Entity
 @Table(name = "t_comment")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 public class Comment {
 
     @Id
     @GeneratedValue
     private Long id;
+    private Long userId;
     private String nickname;
     private String email;
+
     private String content;
     private String avatar;
 
@@ -31,24 +34,32 @@ public class Comment {
     @ManyToOne
     private Blog blog = new Blog();
 
-    @OneToMany(mappedBy = "parentComment")
-    private List<Comment> replyComments = new ArrayList<>();
+//    @OneToMany(mappedBy = "parentComment")
+//    private List<Comment> replyComments = new ArrayList<>();
+
     @ManyToOne
     private Comment parentComment;
 
     private boolean adminComment;
 
-    public Comment() {
+    public Comment() {}
+
+//    @JsonIgnore
+//    public List<Comment> getReplyComments() {
+//        return replyComments;
+//    }
+
+    public Long getUserId() {
+        return userId;
     }
 
-    @JsonIgnore
-    public List<Comment> getReplyComments() {
-        return replyComments;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public void setReplyComments(List<Comment> replyComments) {
-        this.replyComments = replyComments;
-    }
+//    public void setReplyComments(List<Comment> replyComments) {
+//        this.replyComments = replyComments;
+//    }
 
     public Comment getParentComment() {
         return parentComment;
@@ -133,8 +144,8 @@ public class Comment {
                 ", avatar='" + avatar + '\'' +
                 ", createTime=" + createTime +
 //                ", blog=" + blog +
-                ", replyComments=" + replyComments +
-                ", parentComment=" + parentComment +
+//                ", replyComments=" + replyComments +
+//                ", parentComment=" + parentComment +
                 ", adminComment=" + adminComment +
                 '}';
     }

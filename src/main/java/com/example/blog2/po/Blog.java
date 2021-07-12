@@ -79,6 +79,7 @@ public class Blog {
         this.tagIds = tagIds;
     }
 
+    @JsonIgnoreProperties({ "blog"})
     public List<Comment> getComments() {
         return comments;
     }
@@ -86,6 +87,7 @@ public class Blog {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
+
     @JsonIgnoreProperties({ "blogs"})
     public User getUser() {
         return user;
@@ -109,7 +111,6 @@ public class Blog {
         return type;
     }
 
-    @JsonIgnoreProperties({ "blogs"})
     public void setType(Type type) {
         this.type = type;
     }

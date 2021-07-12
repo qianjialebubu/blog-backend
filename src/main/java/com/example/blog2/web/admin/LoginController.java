@@ -28,14 +28,8 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
-    public String loginPage() {
-        return "admin/login";
-    }
-
     @PostMapping("/login")
     public Result login(@RequestHeader Map<String, Object> head, @RequestBody Map<String, Object> para) {
-        System.out.println(head);
         String username = (String) para.get("username");
         String password = (String) para.get("password");
         User user = userService.checkUser(username, password);

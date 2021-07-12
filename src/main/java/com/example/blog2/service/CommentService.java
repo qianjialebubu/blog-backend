@@ -19,4 +19,7 @@ public interface CommentService {
 
     List<String> CommentCountByMonth();
 
+    Comment getCommentById(Long id);
+
+    void deleteComment(Long id);
 }
