@@ -20,7 +20,7 @@ public class ProjectShowController {
     @Autowired
     private ProjectService projectService;
     @GetMapping("/projects")
-    public Result essays() {
+    public Result projects() {
         return new Result(true, StatusCode.OK, "获取项目列表成功", projectService.listProject());
     }
 }

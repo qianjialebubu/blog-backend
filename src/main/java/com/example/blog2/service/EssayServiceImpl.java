@@ -2,6 +2,7 @@ package com.example.blog2.service;
 
 import com.example.blog2.dao.EssayRepository;
 import com.example.blog2.po.Essay;
+import com.example.blog2.util.MarkdownUtils;
 import com.example.blog2.util.MyBeanUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

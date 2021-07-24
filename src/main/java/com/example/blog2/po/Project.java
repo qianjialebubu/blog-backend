@@ -24,6 +24,7 @@ public class Project {
     private String pic_url;
     private String url;
     private String techs;
+    private Integer type;
 
     public Long getId() {
         return id;
@@ -73,6 +74,14 @@ public class Project {
         this.techs = techs;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "Project{" +
@@ -82,6 +91,7 @@ public class Project {
                 ", pic_url='" + pic_url + '\'' +
                 ", url='" + url + '\'' +
                 ", techs='" + techs + '\'' +
+                ", type=" + type +
                 '}';
     }
 }

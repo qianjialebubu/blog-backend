@@ -2,10 +2,7 @@ package com.example.blog2.web.admin;
 
 import com.example.blog2.po.Result;
 import com.example.blog2.po.StatusCode;
-import com.example.blog2.service.BlogService;
-import com.example.blog2.service.CommentService;
-import com.example.blog2.service.TagService;
-import com.example.blog2.service.TypeService;
+import com.example.blog2.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +26,10 @@ public class AdminIndexController {
 
     @Autowired
     private TagService tagService;
+
+    @Autowired
+    private UserService userService;
+
     @Autowired
     private CommentService commentService;
     //获取博客数量
@@ -93,4 +94,8 @@ public class AdminIndexController {
         return new Result(true, StatusCode.OK, "获取评论列表成功",commentService.listComment());
     }
 
+    @GetMapping("/getUserAreaList")
+    public Result getuserAreaList(){
+        return new Result(true,StatusCode.OK,"获取用户地址列表成功",userService.listUser());
+    }
 }

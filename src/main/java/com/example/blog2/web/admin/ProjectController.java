@@ -30,6 +30,7 @@ public class ProjectController {
 
     @PostMapping("/project")
     public Result post(@RequestBody Map<String, Project> para){
+        System.out.println(para);
         Project project = para.get("project");
         Project p;
         if (project.getId() == null){

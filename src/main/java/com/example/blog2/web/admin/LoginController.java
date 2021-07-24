@@ -34,7 +34,7 @@ public class LoginController {
         String password = (String) para.get("password");
         User user = userService.checkUser(username, password);
         if (user != null) {
-            String token = TokenUtil.getToken(user);
+            String token = TokenUtil.sign(user);
             Map<String,Object> info = new HashMap<>();
             info.put("user",user);
             info.put("token",token);

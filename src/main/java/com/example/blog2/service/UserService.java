@@ -2,6 +2,8 @@ package com.example.blog2.service;
 
 import com.example.blog2.po.User;
 
+import java.util.List;
+
 /**
  * @author zhaomin_2017013792_CS181
  * @version 1.0
@@ -9,7 +11,14 @@ import com.example.blog2.po.User;
  */
 public interface UserService {
     User checkUser(String username, String password);
+
     User findUserById(Long id);
 
-    void updateUser(Long id, User admin);
+    User save(User user);
+
+    User updateUser(Long id, User admin);
+
+    List<User> listUser();
+
+    void deleteUserById(Long id);
 }

@@ -29,7 +29,9 @@ public class EssayController {
 
     @PostMapping("/essay")
     public Result post(@RequestBody Map<String, Essay> para){
+        System.out.println(para);
         Essay essay = para.get("essay");
+        System.out.println(essay);
         Essay e;
         if (essay.getId() == null){
             e = essayService.saveEssay(essay);

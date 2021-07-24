@@ -26,12 +26,19 @@ public class User {
     private String password;
     private String email;
     private String avatar;
-    private Integer type;
+    private String loginProvince;
+    private String loginCity;
+    private String loginLat;
+    private String loginLng;
+    private String type;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastLoginTime;
     @OneToMany(mappedBy = "user")
+
     @JsonIgnore
     private List<Blog> blogs = new ArrayList<>();
 
@@ -91,14 +98,13 @@ public class User {
         this.avatar = avatar;
     }
 
-    public Integer getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(String type) {
         this.type = type;
     }
-
     public Date getCreateTime() {
         return createTime;
     }
@@ -115,6 +121,46 @@ public class User {
         this.updateTime = updateTime;
     }
 
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public String getLoginProvince() {
+        return loginProvince;
+    }
+
+    public void setLoginProvince(String loginProvince) {
+        this.loginProvince = loginProvince;
+    }
+
+    public String getLoginCity() {
+        return loginCity;
+    }
+
+    public void setLoginCity(String loginCity) {
+        this.loginCity = loginCity;
+    }
+
+    public String getLoginLat() {
+        return loginLat;
+    }
+
+    public void setLoginLat(String loginLat) {
+        this.loginLat = loginLat;
+    }
+
+    public String getLoginLng() {
+        return loginLng;
+    }
+
+    public void setLoginLng(String loginLng) {
+        this.loginLng = loginLng;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -124,9 +170,14 @@ public class User {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", avatar='" + avatar + '\'' +
+                ", loginProvince='" + loginProvince + '\'' +
+                ", loginCity='" + loginCity + '\'' +
+                ", loginLat='" + loginLat + '\'' +
+                ", loginLng='" + loginLng + '\'' +
                 ", type=" + type +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", lastLoginTime=" + lastLoginTime +
                 '}';
     }
 }

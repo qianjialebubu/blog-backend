@@ -18,9 +18,19 @@ public class Essay {
     @Id
     @GeneratedValue
     private Long id;
+    private Long praise;
     private String title;
     private String content;
     private String image;
+    private String color;
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
@@ -39,6 +49,14 @@ public class Essay {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Long getPraise() {
+        return praise;
+    }
+
+    public void setPraise(Long praise) {
+        this.praise = praise;
     }
 
     public String getContent() {
@@ -69,11 +87,12 @@ public class Essay {
     public String toString() {
         return "Essay{" +
                 "id=" + id +
+                ", praise=" + praise +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", image='" + image + '\'' +
+                ", color='" + color + '\'' +
                 ", createTime=" + createTime +
                 '}';
     }
-
 }

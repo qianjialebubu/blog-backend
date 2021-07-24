@@ -56,7 +56,7 @@ public class CommentController {
         comment.setNickname(user.getNickname());
         comment.setEmail(user.getEmail());
         comment.setAvatar(user.getAvatar());
-        comment.setAdminComment(user.getType() == 1);
+        comment.setAdminComment(user.getType().equals("1"));
         if (parentId != -1){
             comment.setParentComment(commentService.getCommentById(parentId));
         }
