@@ -4,9 +4,6 @@ import com.example.blog2.po.Result;
 import com.example.blog2.po.StatusCode;
 import com.example.blog2.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 /**
