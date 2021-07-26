@@ -1,7 +1,7 @@
 package com.example.blog2.interceptor;
 
 /**
- * @author zhaomin_2017013792_CS181
+ * @author hikari
  * @version 1.0
  * @date 2021/7/14 15:18
  */

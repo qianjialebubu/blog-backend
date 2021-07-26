@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * @author zhaomin_2017013792_CS181
+ * @author hikari
  * @version 1.0
  * @date 2021/4/20 9:57
  */

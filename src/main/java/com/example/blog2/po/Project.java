@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * @author zhaomin_2017013792_CS181
+ * @author hikari
  * @version 1.0
  * @date 2021/7/12 21:07
  */

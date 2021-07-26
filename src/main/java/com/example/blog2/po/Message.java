@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * @author zhaomin_2017013792_CS181
+ * @author hikari
  * @version 1.0
  * @date 2021/7/13 11:14
  */
