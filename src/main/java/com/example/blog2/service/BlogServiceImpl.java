@@ -55,24 +55,44 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Page<Blog> listBlog(Pageable pageable) {
-        return blogRepository.findAll(pageable);
+        Page<Blog> blogs = blogRepository.findAll(pageable);
+        blogs.stream().forEach( blog -> {
+            blog.setContent("");
+            blog.setComments(null);
+        });
+        return blogs;
     }
 
     @Override
     public Page<Blog> listBlog(Long tagId, Pageable pageable) {
-        return blogRepository.findAll((Specification<Blog>) (root, cq, cb) -> cb.equal(root.join("tags").get("id"),tagId),pageable);
+        Page<Blog> blogs = blogRepository.findAll((Specification<Blog>) (root, cq, cb) -> cb.equal(root.join("tags").get("id"),tagId),pageable);
+        blogs.stream().forEach( blog -> {
+            blog.setContent("");
+            blog.setComments(null);
+        });
+        return blogs;
     }
 
     @Override
     public Page<Blog> listBlog(String query, Pageable pageable) {
-        return blogRepository.findByQuery(query,pageable);
+        Page<Blog> blogs = blogRepository.findByQuery(query,pageable);
+        blogs.stream().forEach( blog -> {
+            blog.setContent("");
+            blog.setComments(null);
+        });
+        return blogs;
     }
 
     @Override
     public List<Blog> listRecommendBlogTop(Integer size) {
         Sort sort = Sort.by(Sort.Direction.DESC,"createTime");
         Pageable pageable = PageRequest.of(0,size,sort);
-        return blogRepository.findTop(pageable);
+        List<Blog> blogs = blogRepository.findTop(pageable);
+        blogs.stream().forEach( blog -> {
+            blog.setContent("");
+            blog.setComments(null);
+        });
+        return blogs;
     }
 
     @Transactional

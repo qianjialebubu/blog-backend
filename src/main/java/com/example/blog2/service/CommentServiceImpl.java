@@ -1,6 +1,7 @@
 package com.example.blog2.service;
 
 import com.example.blog2.dao.CommentRepository;
+import com.example.blog2.po.Blog;
 import com.example.blog2.po.Comment;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,11 @@ public class CommentServiceImpl implements CommentService{
     public List<Comment> listCommentByBlogId(Long blogId) {
         Sort sort = Sort.by("createTime");
         List<Comment> comments = commentRepository.findByBlogIdAndParentCommentNull(blogId,sort);
+        comments.forEach(comment -> {
+            Blog blog = comment.getBlog();
+            blog.setContent("");
+            comment.setBlog(blog);
+        });
         return comments;
     }
 
@@ -42,7 +48,13 @@ public class CommentServiceImpl implements CommentService{
 
     @Override
     public List<Comment> listComment() {
-        return commentRepository.findAll();
+        List<Comment> comments = commentRepository.findAll();
+        comments.forEach(comment -> {
+            Blog blog = comment.getBlog();
+            blog.setContent("");
+            comment.setBlog(blog);
+        });
+        return comments;
     }
 
     @Override

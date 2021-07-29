@@ -43,4 +43,9 @@ public class EssayController {
         }
         return new Result(true,StatusCode.OK,"操作成功");
     }
+
+    @GetMapping("/essays")
+    public Result essays() {
+        return new Result(true, StatusCode.OK, "获取随笔列表成功", essayService.listEssay());
+    }
 }

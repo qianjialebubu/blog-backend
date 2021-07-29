@@ -81,7 +81,7 @@ public class IndexController {
         if (id == -1 &&tags.size()>0 ){
             id = tags.get(0).getId();
         }
-        return new Result(true,StatusCode.OK,"获取分类博客列表成功",blogService.listBlog(id,pageable));
+        return new Result(true,StatusCode.OK,"获取标签博客列表成功",blogService.listBlog(id,pageable));
     }
 
 }

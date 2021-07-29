@@ -52,13 +52,13 @@ public class AdministratorController {
             System.out.println(user.getNickname()+" : "+user.getType());
              u = userService.updateUser(user.getId(),user);
         }
-        return new Result(true, StatusCode.OK, "修改用户成功",u );
+        return new Result(true, StatusCode.OK, "修改用户信息成功",u);
     }
 
     @GetMapping("/users/{id}/delete")
     public Result delete(@PathVariable Long id) {
         userService.deleteUserById(id);
-        return new Result(true, StatusCode.OK, "删除用户成功", null);
+        return new Result(true, StatusCode.OK, "删除用户信息成功", null);
     }
 
 }

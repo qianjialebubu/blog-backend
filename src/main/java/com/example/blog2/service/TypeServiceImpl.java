@@ -2,6 +2,7 @@ package com.example.blog2.service;
 
 
 import com.example.blog2.dao.TypeRepository;
+import com.example.blog2.po.Blog;
 import com.example.blog2.po.Type;
 import com.example.blog2.util.MyBeanUtils;
 import org.springframework.beans.BeanUtils;
@@ -30,7 +31,6 @@ public class TypeServiceImpl implements TypeService {
     @Transactional
     @Override
     public Type saveType(Type type) {
-        System.out.println("save"+type);
         return typeRepository.save(type);
     }
 
@@ -55,14 +55,29 @@ public class TypeServiceImpl implements TypeService {
 
     @Override
     public List<Type> listType() {
-        return typeRepository.findAll();
+        List<Type> types = typeRepository.findAll();
+        return getTypes(types);
     }
 
     @Override
     public List<Type> listTypeTop(Integer size) {
         Sort sort = Sort.by(Sort.Direction.DESC,"blogs.size");
         Pageable pageable = PageRequest.of(0,size,sort);
-        return typeRepository.findTop(pageable);
+        List<Type> types = typeRepository.findTop(pageable);
+        return getTypes(types);
+    }
+
+    private List<Type> getTypes(List<Type> types) {
+        types.forEach(type -> {
+            List<Blog> blogs = type.getBlogs();
+            blogs.forEach(blog -> {
+                blog.setContent("");
+                blog.setComments(null);
+                blog.setTags(null);
+            });
+            type.setBlogs(blogs);
+        });
+        return types;
     }
 
     @Override

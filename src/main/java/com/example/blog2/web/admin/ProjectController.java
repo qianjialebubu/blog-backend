@@ -28,6 +28,11 @@ public class ProjectController {
         return new Result(true, StatusCode.OK, "删除随笔成功",null );
     }
 
+    @GetMapping("/projects")
+    public Result projects() {
+        return new Result(true, StatusCode.OK, "获取项目列表成功", projectService.listProject());
+    }
+
     @PostMapping("/project")
     public Result post(@RequestBody Map<String, Project> para){
         System.out.println(para);

@@ -1,6 +1,7 @@
 package com.example.blog2.service;
 
 import com.example.blog2.dao.TagRepository;
+import com.example.blog2.po.Blog;
 import com.example.blog2.po.Tag;
 import com.example.blog2.po.Type;
 import org.springframework.beans.BeanUtils;
@@ -46,25 +47,42 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public List<Tag> listTag() {
-        return tagRepository.findAll();
+        List<Tag> tags = tagRepository.findAll();
+        return reduceTagsAttributes(tags);
     }
 
     @Transactional
     @Override
     public Page<Tag> listTag(Pageable pageable) {
-        return tagRepository.findAll(pageable);
+        Page<Tag> tags = tagRepository.findAll(pageable);
+        return tags;
     }
 
     @Override
     public List<Tag> listTagTop(Integer size) {
         Sort sort = Sort.by(Sort.Direction.DESC,"blogs.size");
         Pageable pageable = PageRequest.of(0,size,sort);
-        return tagRepository.findTop(pageable);
+        List<Tag> tags = tagRepository.findTop(pageable);
+        return reduceTagsAttributes(tags);
     }
 
     @Override
     public List<Tag> listTag(String ids) {
-        return tagRepository.findAllById(convertToList(ids));
+        List<Tag> tags = tagRepository.findAllById(convertToList(ids));
+        return reduceTagsAttributes(tags);
+    }
+
+    private List<Tag> reduceTagsAttributes(List<Tag> tags) {
+        tags.forEach(tag -> {
+            List<Blog> blogs = tag.getBlogs();
+            blogs.forEach(blog -> {
+                blog.setContent("");
+                blog.setComments(null);
+                blog.setUser(null);
+            });
+            tag.setBlogs(blogs);
+        });
+        return tags;
     }
 
     private List<Long> convertToList(String ids) {

@@ -1,0 +1,27 @@
+2021-07-28 13:47:46.470  INFO 18384 --- [restartedMain] com.example.blog2.Blog2Application       : Starting Blog2Application using Java 1.8.0_112 on DESKTOP-LUAO2LV with PID 18384 (C:\Users\zm\IdeaProjects\myblog-backend\target\classes started by zm in C:\Users\zm\IdeaProjects\myblog-backend)
+2021-07-28 13:47:46.481 DEBUG 18384 --- [restartedMain] com.example.blog2.Blog2Application       : Running with Spring Boot v2.4.4, Spring v5.3.5
+2021-07-28 13:47:46.485  INFO 18384 --- [restartedMain] com.example.blog2.Blog2Application       : No active profile set, falling back to default profiles: default
+2021-07-28 13:47:46.603  INFO 18384 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-07-28 13:47:46.604  INFO 18384 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-07-28 13:47:47.804  INFO 18384 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-07-28 13:47:47.970  INFO 18384 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 153 ms. Found 8 JPA repository interfaces.
+2021-07-28 13:47:48.174  WARN 18384 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.example.blog2]' package. Please check your configuration.
+2021-07-28 13:47:48.844  INFO 18384 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8090 (http)
+2021-07-28 13:47:48.856  INFO 18384 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-07-28 13:47:48.857  INFO 18384 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-07-28 13:47:48.997  INFO 18384 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-07-28 13:47:48.998  INFO 18384 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2391 ms
+2021-07-28 13:47:49.239  INFO 18384 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-07-28 13:47:49.315  INFO 18384 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-07-28 13:47:49.659  INFO 18384 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-07-28 13:47:49.817  INFO 18384 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-07-28 13:47:50.718  INFO 18384 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-07-28 13:47:50.745  INFO 18384 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-07-28 13:47:51.757  INFO 18384 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-07-28 13:47:51.772  INFO 18384 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-07-28 13:47:52.601  WARN 18384 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-07-28 13:47:52.729  INFO 18384 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-07-28 13:47:53.997  INFO 18384 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-07-28 13:47:54.275  INFO 18384 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8090 (http) with context path ''
+2021-07-28 13:47:54.286  INFO 18384 --- [restartedMain] com.example.blog2.Blog2Application       : Started Blog2Application in 9.017 seconds (JVM running for 12.466)
+2021-07-28 21:12:31.547  WARN 18384 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h20m5s230ms854µs600ns).

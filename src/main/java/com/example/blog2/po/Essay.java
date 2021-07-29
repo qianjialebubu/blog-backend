@@ -21,7 +21,6 @@ public class Essay {
     private Long praise;
     private String title;
     private String content;
-    private String image;
     private String color;
 
     public String getColor() {
@@ -75,14 +74,6 @@ public class Essay {
         this.createTime = createTime;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     @Override
     public String toString() {
         return "Essay{" +
@@ -90,7 +81,6 @@ public class Essay {
                 ", praise=" + praise +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", image='" + image + '\'' +
                 ", color='" + color + '\'' +
                 ", createTime=" + createTime +
                 '}';
