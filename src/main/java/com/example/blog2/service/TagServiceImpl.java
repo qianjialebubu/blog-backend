@@ -78,7 +78,6 @@ public class TagServiceImpl implements TagService {
             blogs.forEach(blog -> {
                 blog.setContent("");
                 blog.setComments(null);
-                blog.setUser(null);
             });
             tag.setBlogs(blogs);
         });
