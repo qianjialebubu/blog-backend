@@ -1,16 +1,8 @@
 package com.example.blog2.util;
-
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.example.blog2.po.User;
-
 import java.util.Date;
-
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/7/6 16:39
- */
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -19,8 +11,9 @@ import java.util.Date;
 
 public class TokenUtil {
 
-    private static final long EXPIRE_TIME= 10*60*60*1000;
-    private static final String TOKEN_SECRET="Hikari20210714";  //密钥盐
+//    private static final long EXPIRE_TIME= 60*1000; // 过期时间设置为1分钟
+    private static final long EXPIRE_TIME= 10*60*60*1000; // 过期时间设置为10小时
+    private static final String TOKEN_SECRET="qjl20210714";  //密钥盐
 
     /**
      * 签名生成

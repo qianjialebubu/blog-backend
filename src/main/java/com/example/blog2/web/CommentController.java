@@ -9,20 +9,17 @@ import com.example.blog2.po.User;
 import com.example.blog2.service.BlogService;
 import com.example.blog2.service.CommentService;
 import com.example.blog2.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.Map;
 
-
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/4/20 9:58
- */
 @RestController
 @CrossOrigin
+@Api(tags = "首页博客接口文档")
 public class CommentController {
     @Autowired
     private CommentService commentService;
@@ -37,11 +34,13 @@ public class CommentController {
 
     //获取评论集合
     @GetMapping("/comments/{blogId}")
+    @ApiOperation("获取博客评论接口文档")
     public Result comments(@PathVariable Long blogId) {
         return new Result(true, StatusCode.OK, "获取博客评论成功", commentService.listCommentByBlogId(blogId));
     }
 
     @PostMapping("/comments")
+    @ApiOperation("评论发表接口文档")
     public Result post(@RequestBody Map<String,Object> para) {
         System.out.println(para);
         String content= (String) para.get("content");
@@ -67,6 +66,7 @@ public class CommentController {
 
     //删除评论
     @GetMapping("/comments/{id}/delete")
+    @ApiOperation("删除评论接口文档")
     public Result delete(@PathVariable Long id) {
         commentService.deleteComment(id);
         return new Result(true, StatusCode.OK, "删除评论成功", null);

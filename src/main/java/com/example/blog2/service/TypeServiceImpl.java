@@ -16,11 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/4/4 10:01
- */
+
 
 @Service
 public class TypeServiceImpl implements TypeService {

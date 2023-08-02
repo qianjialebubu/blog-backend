@@ -9,11 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/4/9 16:13
- */
+
 @Repository
 public interface TagRepository extends JpaRepository<Tag, Long> {
     Tag findByName(String name);

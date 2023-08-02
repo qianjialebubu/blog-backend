@@ -5,11 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/7/12 16:36
- */
+
 
 @Entity
 @Table(name = "t_essay")

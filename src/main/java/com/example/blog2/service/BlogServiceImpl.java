@@ -1,13 +1,20 @@
 package com.example.blog2.service;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.blog2.dao.BlogRepository;
+import com.example.blog2.dao.EsBlogDao;
+import com.example.blog2.mapper.BlogMapper;
 import com.example.blog2.po.Blog;
+import com.example.blog2.po.EsBlog;
 import com.example.blog2.po.Type;
 import com.example.blog2.util.MarkdownUtils;
 import com.example.blog2.util.MyBeanUtils;
 import com.example.blog2.vo.BlogQuery;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.TermQueryBuilder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,16 +26,18 @@ import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
 import java.util.*;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/4/13 23:03
- */
+
 @Service
-public class BlogServiceImpl implements BlogService {
+public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements BlogService{
 
     @Autowired
     private BlogRepository blogRepository;
+    @Autowired
+    private EsBlogDao esBlogDao;
+//    @Autowired
+//    private BlogService blogService;
+//    @Autowired
+//    private ApplicationContext applicationContext;
 
     @Override
     public Blog getBlog(Long id) {
@@ -75,19 +84,38 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Page<Blog> listBlog(String query, Pageable pageable) {
-        Page<Blog> blogs = blogRepository.findByQuery(query,pageable);
-        blogs.stream().forEach( blog -> {
-            blog.setContent("");
-            blog.setComments(null);
-        });
+//        System.out.println(query);
+        String query1 = query;
+        query = "%"+query+"%";
+        long millis_start = System.currentTimeMillis();
+        Page<Blog> blogs = blogRepository.findByQueryDe(query,pageable);
+        long millis_end = System.currentTimeMillis();
+
+
+//        使用es查询内容
+//        TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery("content", query1);
+//        long start_time = System.currentTimeMillis();
+//        Iterable<EsBlog> blogss = esBlogDao.search(termQueryBuilder);
+//        long end_time = System.currentTimeMillis();
+//        System.out.println("使用es数据库的查询");
+//        System.out.println(end_time-start_time);
+
         return blogs;
     }
 
+    //根据分页数据找到前五条
     @Override
     public List<Blog> listRecommendBlogTop(Integer size) {
         Sort sort = Sort.by(Sort.Direction.DESC,"createTime");
-        Pageable pageable = PageRequest.of(0,size,sort);
+        Pageable pageable = PageRequest.of(0,5,sort);
+//        System.out.println(pageable);
+//        BlogService blogService = applicationContext.getBean(BlogService.class);
+//        List<Blog> blogs = blogService.query().list();
         List<Blog> blogs = blogRepository.findTop(pageable);
+
+//        System.out.println(blogs);
+
+
         blogs.stream().forEach( blog -> {
             blog.setContent("");
             blog.setComments(null);
@@ -179,6 +207,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public List<String> ViewCountByMonth() {
+        System.out.println(blogRepository.ViewCountByMonth());
         return blogRepository.ViewCountByMonth();
     }
 

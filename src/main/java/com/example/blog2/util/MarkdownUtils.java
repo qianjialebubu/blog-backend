@@ -14,11 +14,7 @@ import org.commonmark.renderer.html.HtmlRenderer;
 
 import java.util.*;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/4/19 20:22
- */
+
 public class MarkdownUtils {
 
     /**

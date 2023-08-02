@@ -13,16 +13,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/4/13 23:03
- */
 
 @Repository
 public interface BlogRepository extends JpaRepository<Blog,Long>, JpaSpecificationExecutor<Blog> {
 
-    @Query("select b from Blog b where b.recommend = true")
+//    @Query("select b from Blog b where b.recommend = true")
+    @Query("SELECT b FROM Blog b ORDER BY b.createTime DESC ")
     List<Blog> findTop(Pageable pageable);
     @Query("select function('date_format',b.createTime,'%Y') as year from Blog b group by function('date_format',b.createTime,'%Y') order by year desc ")
     List<String> findGroupYear();
@@ -32,6 +28,9 @@ public interface BlogRepository extends JpaRepository<Blog,Long>, JpaSpecificati
 //    Page<Blog> findByQuery(String query, Pageable pageable);
     @Query("select b from Blog b where b.title like ?1 ")
     Page<Blog> findByQuery(String query, Pageable pageable);
+    //搜索博客内容
+    @Query("select b from Blog b where b.content like ?1 ")
+    Page<Blog> findByQueryDe(String query, Pageable pageable);
 
     @Query("select sum(b.views) from Blog b")
     Long countViews();
@@ -43,8 +42,12 @@ public interface BlogRepository extends JpaRepository<Blog,Long>, JpaSpecificati
     Long countComment();
 
 
-    @Query("select function('date_format',b.createTime, '%Y-%m') AS MONTH,sum(b.views) as views from Blog b group by MONTH order by MONTH desc")
+    @Query("select function('date_format', b.createTime, '%Y-%m') as formattedDate, sum(b.views) as views from Blog b group by function('date_format', b.createTime, '%Y-%m') order by function('date_format', b.createTime, '%Y-%m') desc")
+
+//    @Query("select function('date_format',b.createTime, '%Y-%m') AS MONTH,sum(b.views) as views from Blog b group by MONTH order by MONTH desc")
     List<String> ViewCountByMonth();
+
+//    @Query("select function('date_format', b.createTime, '%Y-%m') AS formattedMonth, count(b) as blogs from Blog b group by formattedMonth order by formattedMonth desc")
 
     @Query("select function('date_format',b.createTime, '%Y-%m') AS MONTH, count (b) as blogs from Blog b group by MONTH order by MONTH desc")
     List<String> BlogCountByMonth();

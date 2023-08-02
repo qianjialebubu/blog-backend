@@ -8,11 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/4/4 10:04
- */
+
 
 @Repository
 public interface TypeRepository extends JpaRepository<Type,Long> {

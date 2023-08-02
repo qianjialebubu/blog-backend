@@ -1,5 +1,6 @@
 package com.example.blog2.po;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -9,18 +10,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/3/31 15:45
- */
 
 @Entity
 @Table(name = "t_blog")
+//@TableName("t_blog")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 public class Blog {
 
     @Id
+//    @GeneratedValue
+//    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @GeneratedValue
     private Long id;
     private String title;

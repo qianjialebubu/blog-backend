@@ -1,5 +1,8 @@
 package com.example.blog2.service;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.blog2.mapper.BlogMapper;
 import com.example.blog2.po.Blog;
 import com.example.blog2.vo.BlogQuery;
 import org.springframework.data.domain.Page;
@@ -9,12 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/4/13 23:00
- */
-public interface BlogService {
+public interface BlogService extends IService<Blog> {
 //    根据id查询
     Blog getBlog(Long id);
 //    分页查询

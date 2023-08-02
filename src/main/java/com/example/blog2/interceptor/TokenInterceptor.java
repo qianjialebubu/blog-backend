@@ -1,22 +1,19 @@
 package com.example.blog2.interceptor;
 
 import com.example.blog2.util.TokenUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/7/6 21:45
- */
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.ModelAndView;
 
+@Slf4j
 @Component
 public class TokenInterceptor implements HandlerInterceptor {
-
+    //Handle：处理器，访问业务方法之前执行，返回true放行，false拦截，多层的Interceptor最先配置的先进行过滤
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,Object handler)throws Exception{
         if(request.getMethod().equals("OPTIONS")){
@@ -25,6 +22,7 @@ public class TokenInterceptor implements HandlerInterceptor {
         }
         response.setCharacterEncoding("utf-8");
         String token = request.getHeader("token");
+        log.info("Token: " + token);
 //        去掉前端返回的token前后的双引号
         token = token.substring(1,token.length()-1);
         if(token != null){
@@ -49,4 +47,17 @@ public class TokenInterceptor implements HandlerInterceptor {
         }
         return false;
     }
+
+    //preHandle执行之后才会执行对应的postHandle
+//    @Override
+//    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+//        HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
+//        System.out.println("执行postHandle");
+//    }
+
+    //全部执行之后再执行
+//    @Override
+//    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+//        HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
+//    }
 }

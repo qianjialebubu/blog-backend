@@ -6,6 +6,8 @@ import com.example.blog2.service.BlogService;
 import com.example.blog2.service.TagService;
 import com.example.blog2.service.TypeService;
 import com.example.blog2.vo.BlogQuery;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,14 +18,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/4/1 11:41
- */
 @RestController
 @CrossOrigin
 @RequestMapping("/admin")
+@Api(tags = "后台博客管理接口文档")
 public class BlogController {
 
     @Autowired
@@ -36,6 +34,7 @@ public class BlogController {
     private TagService tagService;
 
     @PostMapping("/getBlogList")
+    @ApiOperation("获取博客列表接口文档")
     public Result getBlogList(@RequestBody Map<String, Object> para) {
         int pagenum = (int) para.get("pagenum");
         int pagesize = (int) para.get("pagesize");
@@ -51,6 +50,7 @@ public class BlogController {
 
 
     @PostMapping("/blogs")
+    @ApiOperation("操作博客接口文档")
     public Result post(@RequestBody Map<String, Blog> para) {
         Blog blog = para.get("blog");
         blog.setType(typeService.getType(blog.getType().getId()));
@@ -59,7 +59,6 @@ public class BlogController {
         if (blog.getId() == null) {
             b = blogService.saveBlog(blog);
         } else {
-            System.out.println("修改");
             b = blogService.updateBlog(blog.getId(), blog);
         }
         if (b == null) {
@@ -69,19 +68,22 @@ public class BlogController {
     }
 
     @GetMapping("/search")
+    @ApiOperation("获取搜索博客接口文档")
     public Result search(@PageableDefault(size = 8, sort = {"createTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                          @RequestParam String query) {
-        System.out.println(query);
+//        System.out.println(query);
         return new Result(true, StatusCode.OK, "获取搜索博客成功", blogService.listBlog("%" + query + "%", pageable));
     }
 
     @GetMapping("/blogs/{id}/delete")
+    @ApiOperation("根据id删除博客接口文档")
     public Result delete(@PathVariable Long id) {
         blogService.deleteBlog(id);
         return new Result();
     }
 
     @GetMapping("/dealDeletedTag/{id}")
+    @ApiOperation("去除无用标签接口文档")
     public Result dealDeletedTag(@PathVariable Long id){
         Tag tag = tagService.getTag(id);
         if (tag.getBlogs().size()==0){

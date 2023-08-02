@@ -1,0 +1,42 @@
+spring:
+  redis:
+    host: 填写自己redis服务器的host
+    port: 填写自己redis服务器的port
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog1?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
+    username: 填写自己mysql服务器的username
+    password: 填写自己mysql服务器的password
+  jpa:
+    hibernate:
+      ddl-auto: none
+logging:
+  level:
+    root: info
+    com:
+      example:
+        blog2: debug
+  file:
+    name: log.blog.log
+
+server:
+  port: 8090
+  compression:
+    enabled: true
+    mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
+
+#OSS配置
+aliyun:
+  oss:
+    file:
+      # 控制台 - oss - 点击对应桶 - 概览 - 地域节点
+      endpoint: 填写自己阿里云的endpoint
+      keyid: 填写自己阿里云的keyid
+      keysecret: 填写自己阿里云的keysecret
+      bucketname: 填写自己阿里云的bucketname
+
+
+elasticsearch:
+  host: 127.0.0.1
+  port: 9200
+

@@ -11,11 +11,6 @@ import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/3/31 22:58
- */
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -40,7 +35,7 @@ public class UserServiceImpl implements UserService {
         user.setCreateTime(new Date());
         user.setUpdateTime(new Date());
         if (user.getAvatar() == null || "".equals(user.getAvatar())){
-            user.setAvatar("http://hikari.top/images/d5026d40-d68e-4e0d-a0b9-37cd58e3ff35.png");
+            user.setAvatar("http://blog-bu.oss-cn-beijing.aliyuncs.com/ea94074a-8b40-4f98-ab5d-12f1451ce089.jpg?Expires=1680204638&OSSAccessKeyId=LTAI5tCuv6n9NSMSBUs6nQDV&Signature=CF5ikmIM9l3MmBb33tl8bePU8M0%3D");
         }
         return userRepository.save(user);
     }
@@ -62,5 +57,11 @@ public class UserServiceImpl implements UserService {
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    public User selectUserByName(String username) {
+       return userRepository.selectUserByName(username);
+    }
+
 
 }

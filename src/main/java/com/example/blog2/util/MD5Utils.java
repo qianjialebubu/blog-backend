@@ -3,11 +3,7 @@ package com.example.blog2.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/4/1 10:45
- */
+
 public class MD5Utils {
     public static String code(String str) {
         MessageDigest md = null;

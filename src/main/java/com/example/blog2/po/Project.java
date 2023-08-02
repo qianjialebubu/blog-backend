@@ -2,16 +2,9 @@ package com.example.blog2.po;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/7/12 21:07
- */
+
 @Entity
 @Table(name = "t_project")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer"})

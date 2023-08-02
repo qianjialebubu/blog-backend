@@ -6,34 +6,34 @@ import com.example.blog2.po.Project;
 import com.example.blog2.po.Result;
 import com.example.blog2.po.StatusCode;
 import com.example.blog2.service.ProjectService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/7/12 21:08
- */
 @RestController
 @CrossOrigin
 @RequestMapping("/admin")
+@Api(tags = "后台项目管理接口文档")
 public class ProjectController {
     @Autowired
     ProjectService projectService;
     @GetMapping("/project/{id}/delete")
     public Result delete(@PathVariable Long id) {
         projectService.deleteProject(id);
-        return new Result(true, StatusCode.OK, "删除随笔成功",null );
+        return new Result(true, StatusCode.OK, "删除项目成功",null );
     }
 
     @GetMapping("/projects")
+    @ApiOperation("获取项目列表接口文档")
     public Result projects() {
         return new Result(true, StatusCode.OK, "获取项目列表成功", projectService.listProject());
     }
 
     @PostMapping("/project")
+    @ApiOperation("新增项目接口文档")
     public Result post(@RequestBody Map<String, Project> para){
         System.out.println(para);
         Project project = para.get("project");

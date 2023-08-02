@@ -9,11 +9,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/3/31 15:52
- */
+
 @Entity
 @Table(name = "t_type")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer"})

@@ -4,11 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/7/5 21:15
- */
+
 public class PictureUpload {
     //byte数组转file文件方法
     public static void byte2File(byte[] bfile,String filePath,String fileName){

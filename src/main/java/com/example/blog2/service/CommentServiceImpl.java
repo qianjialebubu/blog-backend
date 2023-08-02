@@ -5,6 +5,8 @@ import com.example.blog2.po.Blog;
 import com.example.blog2.po.Comment;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/4/20 15:56
- */
+
 @Service
 public class CommentServiceImpl implements CommentService{
 
@@ -48,7 +46,11 @@ public class CommentServiceImpl implements CommentService{
 
     @Override
     public List<Comment> listComment() {
-        List<Comment> comments = commentRepository.findAll();
+        // 获取评论的数据
+        Sort sort = Sort.by(Sort.Direction.DESC,"createTime");
+        Pageable pageable = PageRequest.of(0,10,sort);
+        List<Comment> comments = commentRepository.findTop(pageable);
+//        List<Comment> comments = commentRepository.findAll();
         comments.forEach(comment -> {
             Blog blog = comment.getBlog();
             blog.setContent("");

@@ -8,11 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/3/31 15:59
- */
+
 
 @Entity
 @Table(name = "t_user")

@@ -1,10 +1,5 @@
 package com.example.blog2.vo;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/4/15 16:16
- */
 public class BlogQuery {
     private String title;
     private Long typeId;

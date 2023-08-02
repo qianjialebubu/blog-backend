@@ -11,11 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/3/30 17:58
- */
+
 //拦截到所有名字具有Controller的控制器
 @ControllerAdvice
 public class ControllerExceptionHandler {

@@ -1,10 +1,5 @@
 package com.example.blog2.interceptor;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/7/14 15:18
- */
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ConcurrentTaskExecutor;
 import org.springframework.web.servlet.config.annotation.*;
@@ -16,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 /**
- * token拦截
+ * token拦截，可以通过xml配置也可以通过配置了进行配置
  */
 @Configuration
 public class WebConfiguration implements WebMvcConfigurer {
@@ -42,8 +37,10 @@ public class WebConfiguration implements WebMvcConfigurer {
         excludePath.add("/login");     //注册
         excludePath.add("/static/**");  //静态资源
         excludePath.add("/assets/**");  //静态资源
+        excludePath.add("/admin/friend/getFriendList"); //得到友链链表
 
         registry.addInterceptor(tokenInterceptor)
+                //拦截以下的请求
                 .addPathPatterns("/admin/**")
                 .excludePathPatterns(excludePath);
         WebMvcConfigurer.super.addInterceptors(registry);

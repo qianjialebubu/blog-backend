@@ -11,11 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author hikari
- * @version 1.0
- * @date 2021/7/12 16:41
- */
+
 @Service
 public class EssayServiceImpl implements EssayService{
 
