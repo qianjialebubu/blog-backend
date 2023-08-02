@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
         user.setCreateTime(new Date());
         user.setUpdateTime(new Date());
         if (user.getAvatar() == null || "".equals(user.getAvatar())){
-            user.setAvatar("http://blog-bu.oss-cn-beijing.aliyuncs.com/ea94074a-8b40-4f98-ab5d-12f1451ce089.jpg?Expires=1680204638&OSSAccessKeyId=LTAI5tCuv6n9NSMSBUs6nQDV&Signature=CF5ikmIM9l3MmBb33tl8bePU8M0%3D");
+            user.setAvatar("https://blog-bu.oss-cn-beijing.aliyuncs.com/blog_static_resource/20230713100359.jpg");
         }
         return userRepository.save(user);
     }
